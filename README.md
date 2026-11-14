@@ -8,7 +8,7 @@ It is recommended to use Xray as the tunnel client.
 
 <https://github.com/XTLS/Xray-core>
 
-Use the following rules to split traffic by file and route Cloudflare IP directly.
+Use the following rules to split traffic by file and route Cloudflare IP directly..
 
 <https://github.com/Loyalsoldier/v2ray-rules-dat>
 
