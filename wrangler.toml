@@ -1,34 +1,12 @@
-name = "workers-tunnel"
+name = "workers-tunnel1"
 main = "build/worker/shim.mjs"
-compatibility_date = "2025-12-02"
+compatibility_date = "2026-11-13"
 
 [build]
-# `cargo install` is a no-op once the binary exists, so this stays offline-cheap
-# locally while a fresh CI runner still gets worker-build.
-# --no-panic-recovery: matches `panic = "abort"` in Cargo.toml; the default
-# module-target recovery glue trips wasm-bindgen's exnref check on current rustc.
-command = "cargo install -q worker-build && worker-build --release --no-panic-recovery"
-
-[observability]
-enabled = true
-head_sampling_rate = 1
+command = "worker-build --release --no-panic-recovery"
 
 [vars]
-# Set with `wrangler secret put USER_ID`, not here. Anything under [vars] is
-# committed to the repository and is readable from the dashboard, and a
-# credential published next to the code makes the worker an open proxy for
-# anyone who reads it. Tunnel traffic is refused while this is unset.
-USER_ID = ""
-
-# Fallback relays, whitespace separated, tried in order when the destination
-# refuses the connection. An entry may pin its own port ("proxy.example:8443");
-# one without a port uses the port the client asked for.
-PROXY_IP = ""
-
-# A site to mirror for everything that is not a tunnel upgrade. Recommended:
-# without it those requests answer 404, which is a thin cover story.
-FALLBACK_SITE = ""
-
-# Serve the vless:// URI at /<USER_ID>. Off by default: it hands the full
-# credential to anyone who can reach that path.
-SHOW_URI = "false"
+USER_ID = "aea5ef46-83a7-49f2-9ccb-186974390f8c"
+SHOW_URI = "true"
+PROXY_IP = "ProxyIP.FI.CMLiussss.net ProxyIP.DE.CMLiussss.net proxyip.fxxk.dedyn.io"
+FALLBACK_SITE = "https://www.cloudflare.com"
